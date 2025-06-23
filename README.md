@@ -2,6 +2,7 @@
 
 ## Запуск
 ```bash
+docker-compose build
 docker-compose up -d
 ```
 ## Начать сканирование и подбор учетных данных
@@ -15,6 +16,10 @@ curl http://localhost:8080/list_bots
 curl http://localhost:8080/deploy_scripts
 curl http://localhost:8080/execute_scripts
 ```
+## Остановить выполнение скрипта
+```bash
+curl http://localhost:8080/stop_attack
+```
 ## Посмотреть логи атакуемого сервера
 ```bash
 docker exec -it victim_server tail -f /var/log/victim/access.loger tail -f /var/log/victim/access.log
@@ -22,4 +27,8 @@ docker exec -it victim_server tail -f /var/log/victim/access.loger tail -f /var/
 ## Зайти в web-интерфейс ip-камеры через браузер
 ```bash
 http://localhost:8081/
+```
+## Остановить
+```bash
+docker-compose down
 ```
