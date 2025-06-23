@@ -1,0 +1,60 @@
+services:
+  cnc:
+    build: server/
+    image: cnc_server
+    container_name: cnc_server
+    ports:
+      - "8080:8080"
+      - "23230:2323"
+    networks:
+      camera_network:
+        ipv4_address: 172.25.0.100
+
+  victim:
+    build: victim/
+    container_name: victim_server
+    ports:
+      - "8085:80"
+    networks:
+      camera_network:
+        ipv4_address: 172.25.0.200
+
+  camera1:
+    build: iot/
+    container_name: camera1
+    networks:
+      camera_network:
+        ipv4_address: 172.25.0.10
+    ports:
+      - "8081:80"
+      - "2221:22"
+      - "23231:23"
+
+  camera2:
+    build: iot/
+    container_name: camera2
+    networks:
+      camera_network:
+        ipv4_address: 172.25.0.11
+    ports:
+      - "8082:80"
+      - "2222:22"
+      - "23232:23"
+
+  camera3:
+    build: iot/
+    container_name: camera3
+    networks:
+      camera_network:
+        ipv4_address: 172.25.0.12
+    ports:
+      - "8083:80"
+      - "2223:22"
+      - "23233:23"
+
+networks:
+  camera_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/16
